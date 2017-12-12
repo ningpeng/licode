@@ -34,6 +34,8 @@ NAN_MODULE_INIT(IOThreadPool::Init) {
 }
 
 NAN_METHOD(IOThreadPool::New) {
+	FUNC_TRACE
+
   if (info.Length() < 1) {
     Nan::ThrowError("Wrong number of arguments");
   }
@@ -48,12 +50,16 @@ NAN_METHOD(IOThreadPool::New) {
 }
 
 NAN_METHOD(IOThreadPool::close) {
+	FUNC_TRACE
+
   IOThreadPool* obj = Nan::ObjectWrap::Unwrap<IOThreadPool>(info.Holder());
 
   obj->me->close();
 }
 
 NAN_METHOD(IOThreadPool::start) {
+	FUNC_TRACE
+
   IOThreadPool* obj = Nan::ObjectWrap::Unwrap<IOThreadPool>(info.Holder());
 
   obj->me->start();

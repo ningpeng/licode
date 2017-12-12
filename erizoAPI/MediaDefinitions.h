@@ -22,4 +22,8 @@ class MediaSource : public Nan::ObjectWrap {
     erizo::MediaSource* msource;
 };
 
+
+#define FUNC_TRACE  printf("===tracex=== %s:%d    %s\n"  , __FUNCTION__, __LINE__, __PRETTY_FUNCTION__);
+
+
 #endif  // ERIZOAPI_MEDIADEFINITIONS_H_

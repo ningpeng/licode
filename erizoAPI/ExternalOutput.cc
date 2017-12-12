@@ -37,10 +37,12 @@ class AsyncCloser : public Nan::AsyncWorker {
     std::shared_ptr<erizo::ExternalOutput> external_output_;
 };
 
-ExternalOutput::ExternalOutput() {}
-ExternalOutput::~ExternalOutput() {}
+ExternalOutput::ExternalOutput() { FUNC_TRACE}
+ExternalOutput::~ExternalOutput() { FUNC_TRACE}
 
 NAN_MODULE_INIT(ExternalOutput::Init) {
+	FUNC_TRACE
+
   // Prepare constructor template
   Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
   tpl->SetClassName(Nan::New("ExternalOutput").ToLocalChecked());
@@ -54,6 +56,8 @@ NAN_MODULE_INIT(ExternalOutput::Init) {
 }
 
 NAN_METHOD(ExternalOutput::New) {
+	FUNC_TRACE
+
   v8::String::Utf8Value param(Nan::To<v8::String>(info[0]).ToLocalChecked());
   std::string url = std::string(*param);
   v8::String::Utf8Value json_param(Nan::To<v8::String>(info[1]).ToLocalChecked());
@@ -122,6 +126,8 @@ NAN_METHOD(ExternalOutput::New) {
 }
 
 NAN_METHOD(ExternalOutput::close) {
+	FUNC_TRACE
+
   ExternalOutput* obj = ObjectWrap::Unwrap<ExternalOutput>(info.Holder());
 
   Nan::Callback *callback;
@@ -135,6 +141,8 @@ NAN_METHOD(ExternalOutput::close) {
 }
 
 NAN_METHOD(ExternalOutput::init) {
+	FUNC_TRACE
+
   // TODO(pedro) Could potentially be slow, think about async'ing it
   ExternalOutput* obj = ObjectWrap::Unwrap<ExternalOutput>(info.Holder());
   std::shared_ptr<erizo::ExternalOutput> me = obj->me;

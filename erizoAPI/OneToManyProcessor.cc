@@ -85,6 +85,8 @@ NAN_MODULE_INIT(OneToManyProcessor::Init) {
 }
 
 NAN_METHOD(OneToManyProcessor::New) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = new OneToManyProcessor();
   obj->me = new erizo::OneToManyProcessor();
   obj->msink = obj->me;
@@ -94,6 +96,8 @@ NAN_METHOD(OneToManyProcessor::New) {
 }
 
 NAN_METHOD(OneToManyProcessor::close) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
   Nan::Callback *callback;
@@ -107,6 +111,8 @@ NAN_METHOD(OneToManyProcessor::close) {
 }
 
 NAN_METHOD(OneToManyProcessor::setPublisher) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -118,6 +124,8 @@ NAN_METHOD(OneToManyProcessor::setPublisher) {
 }
 
 NAN_METHOD(OneToManyProcessor::addExternalOutput) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -135,6 +143,8 @@ NAN_METHOD(OneToManyProcessor::addExternalOutput) {
 }
 
 NAN_METHOD(OneToManyProcessor::setExternalPublisher) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -146,6 +156,8 @@ NAN_METHOD(OneToManyProcessor::setExternalPublisher) {
 }
 
 NAN_METHOD(OneToManyProcessor::getPublisherState) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -156,6 +168,8 @@ NAN_METHOD(OneToManyProcessor::getPublisherState) {
 }
 
 NAN_METHOD(OneToManyProcessor::hasPublisher) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -169,6 +183,8 @@ NAN_METHOD(OneToManyProcessor::hasPublisher) {
 }
 
 NAN_METHOD(OneToManyProcessor::addSubscriber) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 
@@ -185,6 +201,8 @@ NAN_METHOD(OneToManyProcessor::addSubscriber) {
 }
 
 NAN_METHOD(OneToManyProcessor::removeSubscriber) {
+	FUNC_TRACE
+
   OneToManyProcessor* obj = Nan::ObjectWrap::Unwrap<OneToManyProcessor>(info.Holder());
   erizo::OneToManyProcessor *me = (erizo::OneToManyProcessor*)obj->me;
 

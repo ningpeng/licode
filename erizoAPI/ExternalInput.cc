@@ -57,6 +57,8 @@ NAN_MODULE_INIT(ExternalInput::Init) {
 }
 
 NAN_METHOD(ExternalInput::New) {
+	FUNC_TRACE
+
   v8::String::Utf8Value param(Nan::To<v8::String>(info[0]).ToLocalChecked());
   std::string url = std::string(*param);
 
@@ -68,6 +70,8 @@ NAN_METHOD(ExternalInput::New) {
 }
 
 NAN_METHOD(ExternalInput::close) {
+	FUNC_TRACE
+
   ExternalInput* obj = ObjectWrap::Unwrap<ExternalInput>(info.Holder());
   std::shared_ptr<erizo::ExternalInput> me = obj->me;
 
@@ -83,6 +87,8 @@ NAN_METHOD(ExternalInput::close) {
 }
 
 NAN_METHOD(ExternalInput::init) {
+	FUNC_TRACE
+
   // TODO(pedro) Could potentially be slow, think about async'ing it
   ExternalInput* obj = ObjectWrap::Unwrap<ExternalInput>(info.Holder());
   std::shared_ptr<erizo::ExternalInput> me = obj->me;
@@ -92,6 +98,8 @@ NAN_METHOD(ExternalInput::init) {
 }
 
 NAN_METHOD(ExternalInput::setAudioReceiver) {
+	FUNC_TRACE
+
   ExternalInput* obj = ObjectWrap::Unwrap<ExternalInput>(info.Holder());
   std::shared_ptr<erizo::ExternalInput> me = obj->me;
 
@@ -103,6 +111,8 @@ NAN_METHOD(ExternalInput::setAudioReceiver) {
 }
 
 NAN_METHOD(ExternalInput::setVideoReceiver) {
+	FUNC_TRACE
+
   ExternalInput* obj = ObjectWrap::Unwrap<ExternalInput>(info.Holder());
   std::shared_ptr<erizo::ExternalInput> me = obj->me;
 

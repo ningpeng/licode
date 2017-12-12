@@ -23,15 +23,18 @@ using json = nlohmann::json;
 Nan::Persistent<Function> WebRtcConnection::constructor;
 
 WebRtcConnection::WebRtcConnection() {
+	FUNC_TRACE
 }
 
 WebRtcConnection::~WebRtcConnection() {
   if (me.get() != nullptr) {
     me->setWebRtcConnectionEventListener(NULL);
   }
+  FUNC_TRACE
 }
 
 NAN_MODULE_INIT(WebRtcConnection::Init) {
+	FUNC_TRACE
   // Prepare constructor template
   Local<FunctionTemplate> tpl = Nan::New<FunctionTemplate>(New);
   tpl->SetClassName(Nan::New("WebRtcConnection").ToLocalChecked());
@@ -55,6 +58,7 @@ NAN_MODULE_INIT(WebRtcConnection::Init) {
 
 
 NAN_METHOD(WebRtcConnection::New) {
+	FUNC_TRACE
   if (info.Length() < 7) {
     Nan::ThrowError("Wrong number of arguments");
   }
@@ -181,6 +185,8 @@ NAN_METHOD(WebRtcConnection::New) {
 }
 
 NAN_METHOD(WebRtcConnection::close) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   obj->me->setWebRtcConnectionEventListener(NULL);
   obj->me->close();
@@ -192,6 +198,8 @@ NAN_METHOD(WebRtcConnection::close) {
 }
 
 NAN_METHOD(WebRtcConnection::init) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -202,6 +210,8 @@ NAN_METHOD(WebRtcConnection::init) {
 }
 
 NAN_METHOD(WebRtcConnection::createOffer) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
   if (info.Length() < 3) {
@@ -216,6 +226,8 @@ NAN_METHOD(WebRtcConnection::createOffer) {
 }
 
 NAN_METHOD(WebRtcConnection::setMetadata) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -240,6 +252,8 @@ NAN_METHOD(WebRtcConnection::setMetadata) {
 }
 
 NAN_METHOD(WebRtcConnection::setRemoteSdp) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -252,6 +266,8 @@ NAN_METHOD(WebRtcConnection::setRemoteSdp) {
 }
 
 NAN_METHOD(WebRtcConnection::addRemoteCandidate) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -269,6 +285,8 @@ NAN_METHOD(WebRtcConnection::addRemoteCandidate) {
 }
 
 NAN_METHOD(WebRtcConnection::getLocalSdp) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -278,6 +296,8 @@ NAN_METHOD(WebRtcConnection::getLocalSdp) {
 }
 
 NAN_METHOD(WebRtcConnection::getCurrentState) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -287,6 +307,8 @@ NAN_METHOD(WebRtcConnection::getCurrentState) {
 }
 
 NAN_METHOD(WebRtcConnection::addMediaStream) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -297,6 +319,8 @@ NAN_METHOD(WebRtcConnection::addMediaStream) {
 }
 
 NAN_METHOD(WebRtcConnection::removeMediaStream) {
+	FUNC_TRACE
+
   WebRtcConnection* obj = Nan::ObjectWrap::Unwrap<WebRtcConnection>(info.Holder());
   std::shared_ptr<erizo::WebRtcConnection> me = obj->me;
 
@@ -308,6 +332,8 @@ NAN_METHOD(WebRtcConnection::removeMediaStream) {
 // Async methods
 
 void WebRtcConnection::notifyEvent(erizo::WebRTCEvent event, const std::string& message) {
+	FUNC_TRACE
+
   boost::mutex::scoped_lock lock(mutex);
   this->eventSts.push(event);
   this->eventMsgs.push(message);
@@ -317,6 +343,8 @@ void WebRtcConnection::notifyEvent(erizo::WebRTCEvent event, const std::string& 
 
 
 NAUV_WORK_CB(WebRtcConnection::eventsCallback) {
+	FUNC_TRACE
+
   Nan::HandleScope scope;
   WebRtcConnection* obj = reinterpret_cast<WebRtcConnection*>(async->data);
   if (!obj || obj->me == NULL)
