@@ -133,4 +133,8 @@ ELOG_ERROR2(logger, fmt, ##args);
 #define ELOG_FATAL(fmt, args...) \
 ELOG_FATAL2(logger, fmt, ##args);
 
+#define PNDEBUG printf
+#define FUNC_TRACE  PNDEBUG("===trace=== %s:%d    %s\n"  , __FUNCTION__, __LINE__, __PRETTY_FUNCTION__);
+
+
 #endif  // ERIZO_SRC_ERIZO_LOGGER_H_
